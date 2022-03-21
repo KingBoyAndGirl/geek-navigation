@@ -1,14 +1,14 @@
 <p align="center">
-    <img src="http://ww1.sinaimg.cn/large/005tC3DKgy1gtjtpv1yzjj30bo0460t9.jpg" alt="极客猿, 极客猿导航, 独立开发者导航, 导航资源站">
+    <img src="http://ww1.sinaimg.cn/large/005tC3DKgy1gtjtpv1yzjj30bo0460t9.jpg" alt="极客猿, 科技俱乐部导航, 科技探索者导航, 导航资源站">
 </p>
 
 <p align="center">
-  独立开发者的导航站　<br>
+  科技探索者的导航站　<br>
   <a href="http://nav.geekape.net/">Demo</a>  |  <a href="https://github.com/geekape/geek-navigation/commits/nuxt">更新日志</a> | <a href="https://support.qq.com/product/330737">提BUG</a>
 </p>
 
 
-## 极客猿导航截图
+## 科技俱乐部导航截图
 
 **前台**
 

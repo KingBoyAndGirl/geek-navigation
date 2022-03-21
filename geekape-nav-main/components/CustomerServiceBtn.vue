@@ -5,7 +5,6 @@
           <i class="el-icon-service"></i>
         </div>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="a">更新日志</el-dropdown-item>
         <el-dropdown-item command="b">意见反馈</el-dropdown-item>
         <el-dropdown-item command="c">联系我们</el-dropdown-item>
       </el-dropdown-menu>
@@ -27,11 +26,9 @@ export default {
     handleCommand(command) {
       console.log('click on item ' + command);
       if (command === 'b') {
-        window.open('https://support.qq.com/product/330737')
+        window.open('https://www.kejijulebu.cn/requests')
       } else if (command === 'c') {
-          window.open('https://geekape.net/about')
-      } else if (command === 'a') {
-        this.$emit('showLog', true)
+          window.open('https://www.kejijulebu.cn/announcement/398.html')
       }
     }
   }

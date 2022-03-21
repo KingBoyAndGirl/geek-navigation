@@ -4,7 +4,7 @@ import mongoConfig from './mongodb';
 export default (appInfo: EggAppInfo) => {
     const config = {} as PowerPartial<EggAppConfig>;
 
-    config.keys = 'yuanmeng';
+    config.keys = 'kejijulebu';
 
     config.security = {
         csrf: {
@@ -32,7 +32,8 @@ export default (appInfo: EggAppInfo) => {
     };
 
     config.jwt = {
-        secret: 'xiaobing_19960412_jwttoken',
+        //secret: 'xiaobing_19960412_jwttoken',
+        secret: 'dS83NVctOiJyLClrJ2F+e0F8KlQ2ZF0zc09JRTR3Zks=',
     };
 
     config.routerAuth = [

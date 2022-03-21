@@ -7,11 +7,11 @@
   >
     <el-carousel-item>
       <p class="medium">
-        极客猿梦导航，专注独立开发者的导航站。<a
+        科技俱乐部，专注科技探索者网站。<a
           class="link"
-          href="https://github.com/geekape/geek-navigation"
+          href="https://www.kejijulebu.cn/"
           target="_blank"
-          >开源去下载</a
+          >去访问</a
         >
       </p>
     </el-carousel-item>
@@ -19,7 +19,7 @@
       <p class="medium">
         一个好的产品要经历千锤百炼，我们需要你的建议。<a
           class="link"
-          href="https://github.com/geekape/geek-navigation"
+          href="https://www.kejijulebu.cn/requests"
           target="_blank"
           >去围观</a
         >

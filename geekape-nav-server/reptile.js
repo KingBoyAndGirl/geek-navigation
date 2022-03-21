@@ -1,78 +1,80 @@
-const request = require('request');
-const cheerio = require('cheerio');
 const mongoose = require("mongoose");
-const appConfig = require("../geekape-nav-main/nuxt.config");
-var db = mongoose.connect(appConfig.env.mongoUrl, { useNewUrlParser: true });
 //引入数据模型模块
-const navData = require("./server/model/navSchema");
-const categorySchema = require("./server/model/categorySchema");
+const navData = require("./model/navSchema");
+const categorySchema = require("./model/categorySchema");
+
+const fs = require('fs');
+const filePath = "./geekape-20220321215007.json"
+mongoose.connect('mongodb://127.0.0.1:27017/navigation', {useNewUrlParser: true, useUnifiedTopology: true});
+
+let datas = null;
 
 class Reptile {
-  constructor(url, type) {
-    this.rootUrl = 'http://chuangzaoshi.com/'
-    this.url = this.rootUrl + url
-    this.type = type
-    this.init()
-  }
-
-  async init() {
-    let categoryData = {
-      name: this.type,
-      categoryId: '',
+    constructor(type) {
+        this.type = type
+        this.init()
     }
-    const categoryDataRes = await categorySchema.create(categoryData)
-    this.categoryId = categoryDataRes._id
-    this.start()
-  }
 
-  async start() {
-    request(this.url, async (error, res, body) => {
-      if (!error && res.statusCode == 200) {
-        const $ = cheerio.load(body)
-        const $cardBlock = $('.panel')
-
-        for (let i = 0; i < $cardBlock.length; i++) {
-          const secondCategoryName = $('.panel-title.card').eq(i).text().trim()
-          const {_id: secondCategoryId } = await categorySchema.create({
-            categoryId: this.categoryId,
-            name: secondCategoryName
-          })
-
-          const websites = []
-          const length = $('.panel').eq(i).find('.card-title').length
-          for (let j = 0; j < length; j++) {
-            const name = $('.panel').eq(i).find('.card-title').eq(j).text().trim()
-            const href = $('.panel').eq(i).find('.card .card-heading').eq(j).attr('title')
-            const desc = $('.panel').eq(i).find('.card .card-body').eq(j).text().trim()
-            const logo = this.rootUrl + $('.panel').eq(i).find('.card-icon img').eq(j).attr('src')
-            websites.push(navData.create({
-              categoryId: secondCategoryId,
-              name,
-              href,
-              desc,
-              logo,
-            }))
-          }
-          await Promise.all(websites)
+    async init() {
+        let categoryData = {
+            name: this.type,
+            categoryId: '',
         }
-      }
+        const categoryDataRes = await categorySchema.create(categoryData)
+        this.categoryIds = categoryDataRes._id
+        this.start_geekape()
+    }
 
-      console.log(`${this.url}请求完成`)
-    });
-  }
+    async start_geekape() {
+
+        for (let i = 0; i < datas.length; i++) {
+            const secondCategoryName = datas[i].name;
+            const {_id: secondCategoryId} = await categorySchema.create({
+                categoryId: this.categoryIds,
+                name: secondCategoryName
+            })
+
+
+            const websites = []
+            const list = datas[i]["list"];
+            for (let j = 0; j < list.length; j++) {
+                const name = list[j].name
+                const href = list[j].href
+                const desc = list[j].desc
+                const logo = list[j].logo
+                websites.push(navData.create({
+                    categoryId: secondCategoryId,
+                    name,
+                    href,
+                    desc,
+                    logo,
+                }))
+            }
+            await Promise.all(websites)
+        }
+        console.log(`${this.type}请求完成`)
+    }
 }
 
 
-
-
-
 async function main() {
-  await Promise.all([
-    new Reptile('index', '设计'),
-    new Reptile('code', '前端'),
-    new Reptile('operate', '运营'),
-    new Reptile('product', '产品'),
-  ])
+    fs.readFile(filePath, 'utf-8', async function (err, data) {
+        if (err) {
+            console.error(`-----=====文件读取失败`)
+        } else {
+            data = JSON.parse(data)["data"][0];
+            datas = data["data"];
+        }
+    });
+    await Promise.all([
+        new Reptile('开发'),
+        new Reptile('运营'),
+        new Reptile('设计'),
+        new Reptile('产品'),
+        new Reptile('资源下载'),
+        new Reptile('计算机'),
+        new Reptile('休闲娱乐'),
+    ])
 }
 
 main()

@@ -14,7 +14,7 @@
         <li>feat: 导航详情页</li>
         <li>refactor: nav卡片样式优化</li>
         <li>refactor: 规范前后台接口返回值</li>
-        <li>refactor: 重构极客猿导航接口</li>
+        <li>refactor: 重构科技俱乐部导航接口</li>
       </ul>
     </el-dialog>
   </div>

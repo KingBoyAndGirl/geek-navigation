@@ -2,10 +2,11 @@ const request = require('request');
 const cheerio = require('cheerio');
 const mongoose = require("mongoose");
 const appConfig = require("./nuxt.config");
-var db = mongoose.connect(appConfig.env.mongoUrl, { useNewUrlParser: true });
+mongoose.connect('mongodb://127.0.0.1:27017/navigation', { useNewUrlParser: true ,useUnifiedTopology: true});
+
 //引入数据模型模块
-const navData = require("./server/model/navSchema");
-const categorySchema = require("./server/model/categorySchema");
+const navData = require("./model/navSchema");
+const categorySchema = require("./model/categorySchema");
 
 class Reptile {
   constructor(url, type) {

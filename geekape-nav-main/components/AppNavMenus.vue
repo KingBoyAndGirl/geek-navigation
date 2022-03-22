@@ -203,8 +203,8 @@ $sidebar-w: auto;
   }
 
 
-  /deep/ .el-menu,
-  /deep/ .el-menu--collapse {
+  ::v-deep .el-menu,
+  ::v-deep .el-menu--collapse {
     border: 0;
   }
 

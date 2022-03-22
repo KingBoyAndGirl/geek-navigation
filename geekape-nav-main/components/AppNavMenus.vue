@@ -21,7 +21,7 @@
         <el-col :span="24">
           <el-menu
             class="el-menu-vertical-demo"
-            background-color="#4700f1"
+            background-color="#2c2e2f"
             text-color="#fff"
             active-text-color="#a27cff"
             :default-active="defaultActive"
